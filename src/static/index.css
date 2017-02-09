@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+body, html, div#root {
+  height: 100%;
+}
+
+.App, button {
+  font-size: 24px;
+}
+
+p {
+  margin: 10px 0;
+}
+
+button {
+  width: 100%;
+  padding: 10px 0;
+}
