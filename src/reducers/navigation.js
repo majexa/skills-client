@@ -4,7 +4,7 @@ const dummy = (state = {}, action) => {
 
     case 'SCREEN_INIT':
       return {
-        screen: 'Task',
+        screen: 'Login',
         nextScreen: false,
         startChange: false,
         id: 5

@@ -4,6 +4,7 @@ import Navigation from './Navigation';
 import ScreenInit from './ScreenInit';
 import ScreenTaskPhoto from './ScreenTaskPhoto';
 import ScreenTask from './ScreenTask';
+import ScreenLogin from './ScreenLogin';
 import ScreenA from './ScreenA';
 
 class Screens extends React.Component {
@@ -25,6 +26,8 @@ class Screens extends React.Component {
         return <ScreenInit/>;
       case 'TaskPhoto':
         return <ScreenTaskPhoto/>;
+      case 'Login':
+        return <ScreenLogin/>;
       case 'Task':
         return <ScreenTask/>;
       default:
