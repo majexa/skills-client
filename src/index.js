@@ -5,7 +5,7 @@ import {Provider} from 'react-redux'
 import App from './components/App'
 import reducer from './reducers'
 import './static/index.css';
-import 'babel-polyfill';
+//import 'babel-polyfill';
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 

@@ -28,17 +28,23 @@ class ScreenLogin extends React.Component {
   render() {
     return (
       <div style={{width: this.props.size.width + 'px'}} className={'screen sInit'}>
-        <input name="phone" type="phone"
-               value={this.state.phone}
-               onChange={this.phoneChange.bind(this)}
+        <div className="cont">
+          <p>
+          <input name="phone" type="tel"
+                 value={this.state.phone}
+                 onChange={this.phoneChange.bind(this)}
 
-        />
-        <input name="phone" type="number"
-               value={this.state.code}
-               onChange={this.codeChange.bind(this)}
+          />
+          </p>
+          <p>
+          <input name="phone" type="number"
+                 value={this.state.code}
+                 onChange={this.codeChange.bind(this)}
 
-        />
-        <button onClick={this.login.bind(this)}>Войти</button>
+          />
+          </p>
+          <button onClick={this.login.bind(this)}>Войти</button>
+        </div>
       </div>
     );
   }
