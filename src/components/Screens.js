@@ -5,6 +5,8 @@ import ScreenInit from './ScreenInit';
 import ScreenTaskPhoto from './ScreenTaskPhoto';
 import ScreenTask from './ScreenTask';
 import ScreenLogin from './ScreenLogin';
+import ScreenSmsCode from './ScreenSmsCode';
+import ScreenChallengeList from './ScreenChallengeList';
 import ScreenA from './ScreenA';
 
 class Screens extends React.Component {
@@ -28,6 +30,10 @@ class Screens extends React.Component {
         return <ScreenTaskPhoto/>;
       case 'Login':
         return <ScreenLogin/>;
+      case 'SmsCode':
+        return <ScreenSmsCode/>;
+      case 'ChallengeList':
+        return <ScreenChallengeList/>;
       case 'Task':
         return <ScreenTask/>;
       default:

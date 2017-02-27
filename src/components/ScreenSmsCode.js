@@ -3,25 +3,31 @@ import {connect} from 'react-redux';
 import * as axios from 'axios';
 import config from '../config';
 
-class ScreenLogin extends React.Component {
+class ScreenSmsCode extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      phone: ''
+      code: '' //54289
     };
   }
 
+  // handleChange(event) {
+  //   this.setState(Object.assign(this.state, {
+  //     code: event.target.value
+  //   }));
+  // }
+
   handleChange(event) {
-    this.setState({phone: event.target.value});
-    this.context.store.dispatch({
-      type: 'PHONE_CHANGE',
-      phone: this.state.phone
-    });
+    this.setState({code: event.target.value});
+    if (this.validate()) {
+      this.login();
+    }
   }
 
+
   validate() {
-    if (this.state.phone && this.state.phone.match(/^[1-9]{1}[0-9]{10}$/)) {
+    if (this.state.code && this.state.code.match(/^[0-9]{5}$/)) {
       return true;
     }
     return false;
@@ -32,43 +38,45 @@ class ScreenLogin extends React.Component {
       <div style={{width: this.props.size.width + 'px'}} className={'screen sInit'}>
         <div className="cont">
           <p>
-            <input name="phone" type="tel"
-                   value={this.state.phone}
+            <input name="phone" type="number"
+                   value={this.state.code}
                    onChange={this.handleChange.bind(this)}
-                   onKeyUp={this.handleChange.bind(this)}
             />
           </p>
           {(this.validate() ?
               <button
-                onClick={this.next.bind(this)}>
-                Далее >
+                onClick={this.login.bind(this)}>
+                Войти
               </button>
               : <button
-                disabled
-                onClick={this.next.bind(this)}>
-                Далее >
+                disabled>
+                Войти
               </button>
           )}
-
         </div>
       </div>
     );
   }
 
-  next(event) {
-    event.preventDefault();
+  next(data) {
     this.context.store.dispatch({
       type: 'SCREEN_CHANGE',
-      screen: 'SmsCode'
+      screen: 'ChallengeList'
     });
   }
 
-  login(event) {
-    event.preventDefault();
+  login() {
+    this._login(this.next.bind(this), function() {
+      alert('FUCK');
+    });
+  }
+
+  _login(onSuccess, onFails) {
+    console.log('try to login');
     axios.get(config.serverUrl + '/api/v1/login?phone=' +
-      this.state.phone + '&code=' + this.state.code
+      this.props.phone.phone + '&code=' + this.state.code
     ).then((response) => {
-      console.log(response.data);
+      onSuccess(response.data);
     }).catch((error) => {
       console.log(error);
     });
@@ -76,7 +84,7 @@ class ScreenLogin extends React.Component {
 
 }
 
-ScreenLogin.contextTypes = {
+ScreenSmsCode.contextTypes = {
   store: React.PropTypes.object
 };
 
@@ -84,6 +92,4 @@ const mapStateToProps = state => (state);
 
 export default connect(
   mapStateToProps
-)(ScreenLogin);
-
-
+)(ScreenSmsCode);

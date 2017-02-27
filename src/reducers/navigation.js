@@ -1,7 +1,6 @@
 const dummy = (state = {}, action) => {
 
   switch (action.type) {
-
     case 'SCREEN_INIT':
       return {
         screen: 'Login',
@@ -10,6 +9,7 @@ const dummy = (state = {}, action) => {
         id: 5
       };
     case 'SCREEN_CHANGE':
+      if (!action.screen) throw new Error('FUCKOFF');
       if (state.screen === action.screen) {
         console.log('Already on screen "' + action.screen + '". Skipped');
         return state;
