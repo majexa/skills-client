@@ -12,12 +12,6 @@ class ScreenSmsCode extends React.Component {
     };
   }
 
-  // handleChange(event) {
-  //   this.setState(Object.assign(this.state, {
-  //     code: event.target.value
-  //   }));
-  // }
-
   handleChange(event) {
     this.setState({code: event.target.value});
     if (this.validate()) {
@@ -26,7 +20,6 @@ class ScreenSmsCode extends React.Component {
   }
 
   validate() {
-    console.log(this.state.code);
     if (this.state.code && this.state.code.match(/^[0-9]{5}$/)) {
       return true;
     }
@@ -38,7 +31,7 @@ class ScreenSmsCode extends React.Component {
       <div style={{width: this.props.size.width + 'px'}} className={'screen sInit'}>
         <div className="cont">
           <p>
-            <input name="phone" type="number"
+            <input name="code" type="number" placeholder="смс код"
                    value={this.state.code}
                    onChange={this.handleChange.bind(this)}
                    onKeyUp={this.handleChange.bind(this)}
@@ -54,9 +47,23 @@ class ScreenSmsCode extends React.Component {
                 Войти
               </button>
           )}
+
+          <button
+            onClick={this.gotoLogin.bind(this)}>
+            Неверный телефон
+          </button>
+
         </div>
       </div>
     );
+  }
+
+  gotoLogin() {
+    this.context.store.dispatch({
+      type: 'SCREEN_CHANGE',
+      screen: 'Login',
+      direction: 'left'
+    });
   }
 
   next(data) {
@@ -67,8 +74,7 @@ class ScreenSmsCode extends React.Component {
   }
 
   login() {
-    console.log('login');
-    this._login(this.next.bind(this), function() {
+    this._login(null, function () {
       alert('FUCK');
     });
   }
@@ -78,7 +84,19 @@ class ScreenSmsCode extends React.Component {
     axios.get(config.serverUrl + '/api/v1/login?phone=' +
       this.props.phone.phone + '&code=' + this.state.code
     ).then((response) => {
-      onSuccess(response.data);
+      if (response.data.error) {
+        this.context.store.dispatch({
+          type: 'SCREEN_CHANGE',
+          screen: 'Error',
+          text: response.data.error
+        });
+      } else {
+        //onSuccess(response.data);
+        this.context.store.dispatch({
+          type: 'SCREEN_CHANGE',
+          screen: 'ChallengeList'
+        });
+      }
     }).catch((error) => {
       console.log(error);
     });

@@ -5,10 +5,11 @@ const dummy = (state = {}, action) => {
   switch (action.type) {
     case 'SCREEN_INIT':
       return {
-        screen: 'Login',
+        // screen: 'ChallengeList',
+        screen: 'ChallengePage',
+        id: '58b56537ccab64292288af49',
         nextScreen: false,
-        startChange: false,
-        id: 5
+        startChange: false
       };
     case 'SCREEN_CHANGE':
       if (!action.screen) throw new Error('FUCKOFF');
@@ -21,9 +22,9 @@ const dummy = (state = {}, action) => {
         startChange: true,
         direction: action.direction || 'right'
       };
-      if (state.screen) {
-        data.prevScreen = state.screen;
-      }
+      // if (state.screen) {
+      //   data.prevScreen = state.screen;
+      // }
       if (action.id) {
         data.id = action.id;
       }

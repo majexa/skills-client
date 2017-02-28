@@ -5,6 +5,18 @@
     background: #298cff;
     color: #fff;
     border: 0;
+    margin-bottom: 20px;
+}
+.phoneField {
+    position: relative;
+}
+.screens .phonePlus {
+    position: absolute;
+    left: -25px;
+    top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+
 }
 .screens button:disabled {
     background: #ccc;

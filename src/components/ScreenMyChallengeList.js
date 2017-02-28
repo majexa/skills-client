@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import '../static/challengeManager.css';
 
-class ScreenChallengeList extends React.Component {
+class ScreenMyChallengeList extends React.Component {
 
   render() {
     return (
@@ -25,14 +25,14 @@ class ScreenChallengeList extends React.Component {
   itemClick(id) {
     this.context.store.dispatch({
       type: 'SCREEN_CHANGE',
-      screen: 'ChallengePage',
+      screen: 'MyChallengePage',
       id: id
     });
   }
 
 }
 
-ScreenChallengeList.contextTypes = {
+ScreenMyChallengeList.contextTypes = {
   store: React.PropTypes.object
 };
 
@@ -40,6 +40,6 @@ const mapStateToProps = state => (state);
 
 export default connect(
   mapStateToProps
-)(ScreenChallengeList);
+)(ScreenMyChallengeList);
 
 

@@ -1,0 +1,11 @@
+.challengeManager {
+    width: 100%;
+    text-align: left;
+}
+.challengeManager .item {
+    padding: 10px 20px;
+    border-bottom: 1px solid #CCC;
+}
+.challengeManager .item:active {
+    background: #ecefa7;
+}

@@ -12,6 +12,10 @@ class ScreenLogin extends React.Component {
     };
   }
 
+  componentDidMount() {
+
+  }
+
   handleChange(event) {
     this.setState({phone: event.target.value});
     this.context.store.dispatch({
@@ -21,7 +25,7 @@ class ScreenLogin extends React.Component {
   }
 
   validate() {
-    if (this.state.phone && this.state.phone.match(/^[1-9]{1}[0-9]{10}$/)) {
+    if (this.props.phone.phone && this.props.phone.phone.match(/^[1-9]{1}[0-9]{10}$/)) {
       return true;
     }
     return false;
@@ -31,9 +35,9 @@ class ScreenLogin extends React.Component {
     return (
       <div style={{width: this.props.size.width + 'px'}} className={'screen sInit'}>
         <div className="cont">
-          <p>
-            <input name="phone" type="tel"
-                   value={this.state.phone}
+          <p className="phoneField">
+            <span className="phonePlus">+</span><input name="phone" type="tel" placeholder="телефон"
+                   value={this.props.phone.phone}
                    onChange={this.handleChange.bind(this)}
                    onKeyUp={this.handleChange.bind(this)}
             />

@@ -6,7 +6,9 @@ const dummy = (state = {}, action) => {
         phone: action.phone
       });
     default:
-      return state;
+      return Object.assign({}, state, {
+        phone: '79202560776'
+      });
   }
 
 };

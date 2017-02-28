@@ -5,6 +5,8 @@ import Navigation from './Navigation';
 
 import '../static/screens.css';
 import '../static/header.css';
+import config from '../config';
+import * as axios from 'axios';
 
 class App extends React.Component {
 
@@ -20,7 +22,30 @@ class App extends React.Component {
     // socket.on('connect', (() => {
     //   socket.emit('asd', { das: 123 });
     // }));
-
+    axios.get(config.serverUrl + '/api/v1/challenges').then((response) => {
+      if (response.data.error) {
+        this.context.store.dispatch({
+          type: 'SCREEN_CHANGE',
+          screen: 'Error',
+          text: response.data.error
+        });
+      } else {
+        // ------------
+        let data = {};
+        for (let i=0; i<response.data.body.length; i++) {
+          let v = response.data.body[i];
+          data[v.id] = v.data;
+        }
+        // ------------
+        this.context.store.dispatch({
+          type: 'SET_CHALLENGES',
+          items: response.data,
+          data: data
+        });
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
 
     setTimeout(() => {
       this.context.store.dispatch({
@@ -44,16 +69,11 @@ class App extends React.Component {
     }, false);
     this.initSize();
 
-
-
-
     this.context.store.dispatch({
       type: 'WINDOW_SIZE_CHANGE',
       width: window.innerWidth,
       height: window.innerHeight
     });
-
-
 
 
   }
@@ -74,32 +94,28 @@ class App extends React.Component {
   }
 
   back() {
-    const state = this.context.store.getState();
-    if (state.prevScreen) {
-      this.context.store.dispatch({
-        type: 'SCREEN_CHANGE',
-        screen: state.prevScreen,
-        direction: 'left'
-      });
-    }
+    if (!this.props.navigation.prevScreen) return;
+    this.context.store.dispatch({
+      type: 'SCREEN_CHANGE',
+      screen: this.props.navigation.prevScreen,
+      direction: 'left'
+    });
   }
 
   render() {
     if (this.state.loaded === false) {
       return <div className="Loading">Loading...</div>;
     }
-    const isBack = !!this.context.store.getState().prevScreen;
     return (
       <div className="App" style={{width: this.props.size.width}}>
         <div className="header">
           {
-            isBack ?
+            this.props.navigation.prevScreen ?
               <button className="back" onClick={this.back.bind(this)}>&#9664;</button>
               :
               <button className="back">H</button>
           }
-
-          Skills App
+          App
         </div>
         <Screens/>
         {/*<Navigation/>*/}

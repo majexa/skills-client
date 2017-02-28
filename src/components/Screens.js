@@ -2,11 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Navigation from './Navigation';
 import ScreenInit from './ScreenInit';
+import ScreenError from './ScreenError';
 import ScreenTaskPhoto from './ScreenTaskPhoto';
 import ScreenTask from './ScreenTask';
 import ScreenLogin from './ScreenLogin';
 import ScreenSmsCode from './ScreenSmsCode';
 import ScreenChallengeList from './ScreenChallengeList';
+import ScreenChallengePage from './ScreenChallengePage';
 import ScreenA from './ScreenA';
 
 class Screens extends React.Component {
@@ -19,13 +21,14 @@ class Screens extends React.Component {
         });
       }, 200); // must be equals to css ".screens transition-duration" property
     }
-
   }
 
   getScreenComponent(name) {
     switch (name) {
       case 'Init':
         return <ScreenInit/>;
+      case 'Error':
+        return <ScreenError/>;
       case 'TaskPhoto':
         return <ScreenTaskPhoto/>;
       case 'Login':
@@ -34,6 +37,8 @@ class Screens extends React.Component {
         return <ScreenSmsCode/>;
       case 'ChallengeList':
         return <ScreenChallengeList/>;
+      case 'ChallengePage':
+        return <ScreenChallengePage/>;
       case 'Task':
         return <ScreenTask/>;
       default:
