@@ -43,6 +43,19 @@ class App extends React.Component {
       // });
     }, false);
     this.initSize();
+
+
+
+
+    this.context.store.dispatch({
+      type: 'WINDOW_SIZE_CHANGE',
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
+
+
+
+
   }
 
   initSize() {
@@ -60,13 +73,34 @@ class App extends React.Component {
     });
   }
 
+  back() {
+    const state = this.context.store.getState();
+    if (state.prevScreen) {
+      this.context.store.dispatch({
+        type: 'SCREEN_CHANGE',
+        screen: state.prevScreen,
+        direction: 'left'
+      });
+    }
+  }
+
   render() {
     if (this.state.loaded === false) {
       return <div className="Loading">Loading...</div>;
     }
+    const isBack = !!this.context.store.getState().prevScreen;
     return (
       <div className="App" style={{width: this.props.size.width}}>
-        <div className="header">Skills App</div>
+        <div className="header">
+          {
+            isBack ?
+              <button className="back" onClick={this.back.bind(this)}>&#9664;</button>
+              :
+              <button className="back">H</button>
+          }
+
+          Skills App
+        </div>
         <Screens/>
         {/*<Navigation/>*/}
       </div>
