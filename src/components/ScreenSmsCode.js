@@ -25,8 +25,8 @@ class ScreenSmsCode extends React.Component {
     }
   }
 
-
   validate() {
+    console.log(this.state.code);
     if (this.state.code && this.state.code.match(/^[0-9]{5}$/)) {
       return true;
     }
@@ -41,6 +41,7 @@ class ScreenSmsCode extends React.Component {
             <input name="phone" type="number"
                    value={this.state.code}
                    onChange={this.handleChange.bind(this)}
+                   onKeyUp={this.handleChange.bind(this)}
             />
           </p>
           {(this.validate() ?
@@ -66,6 +67,7 @@ class ScreenSmsCode extends React.Component {
   }
 
   login() {
+    console.log('login');
     this._login(this.next.bind(this), function() {
       alert('FUCK');
     });
