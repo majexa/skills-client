@@ -1,3 +1,5 @@
+let lastScreen = 'not-defined';
+
 const dummy = (state = {}, action) => {
 
   switch (action.type) {
@@ -19,6 +21,9 @@ const dummy = (state = {}, action) => {
         startChange: true,
         direction: action.direction || 'right'
       };
+      if (state.screen) {
+        data.prevScreen = state.screen;
+      }
       if (action.id) {
         data.id = action.id;
       }

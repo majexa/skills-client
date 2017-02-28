@@ -15,17 +15,7 @@ p {
   margin: 0 0 20px 0;
 }
 
-button {
-  width: 100%;
-  padding: 10px 0;
-  border-radius: 100px;
-  background: #298cff;
-  color: #fff;
-  border: 0;
-}
-button:disabled {
-  background: #ccc;
-}
+
 input {
   border: 2px solid #ccc;
   border-radius: 100px;

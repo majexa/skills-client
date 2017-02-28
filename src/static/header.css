@@ -5,7 +5,8 @@ top: 0;
 left: 0;
 background: #7a463e;
 color: #fff;
-padding: 10px;
+height: 50px;
+vertical-align: middle;
 width: 100%;
 }
 .App {
