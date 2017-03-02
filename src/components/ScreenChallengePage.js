@@ -18,11 +18,16 @@ class ScreenChallengePage extends React.Component {
 
   render() {
     console.log(this.state);
+    let startDescription = null;
+    if (this.state.data.periodType === 'default') {
+      startDescription = <p><small>Вы можете начать в любое время, но закончить сможете не позже 23:59</small></p>
+    }
     return (
       <div style={{width: this.props.size.width + 'px'}} className={'screen sInit'}>
         <div className="cont">
           <h2>{this.state.data.title}</h2>
           <p>{this.state.data.shortDesc}</p>
+          {startDescription}
           <button>Начать</button>
         </div>
       </div>
