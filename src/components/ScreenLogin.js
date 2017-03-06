@@ -5,22 +5,11 @@ import config from '../config';
 
 class ScreenLogin extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      phone: ''
-    };
-  }
-
-  componentDidMount() {
-
-  }
-
   handleChange(event) {
-    this.setState({phone: event.target.value});
+    //event.stopPropagation();
     this.context.store.dispatch({
       type: 'PHONE_CHANGE',
-      phone: this.state.phone
+      phone: event.target.value
     });
   }
 
@@ -60,7 +49,7 @@ class ScreenLogin extends React.Component {
   }
 
   next() {
-    //this.sendSms();
+    this.sendSms();
     this.context.store.dispatch({
       type: 'SCREEN_CHANGE',
       screen: 'SmsCode'

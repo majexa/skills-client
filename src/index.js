@@ -10,6 +10,16 @@ import './static/buttons.css';
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
+window.addEventListener('message', function (event) {
+  if (!event.data) return;
+  if (!event.data.challengeId) return;
+  store.dispatch({
+    type: 'SCREEN_CHANGE',
+    screen: 'ChallengePage',
+    id: event.data.challengeId
+  });
+});
+
 store.dispatch({
   type: 'SCREEN_INIT'
 });

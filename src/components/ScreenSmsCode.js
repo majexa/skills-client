@@ -10,7 +10,7 @@ class ScreenSmsCode extends React.Component {
     this.loginTimeoutId = 0;
     this.nextScreenTimeoutId = 0;
     this.state = {
-      code: '' //54289
+      code: ''
     };
   }
 
@@ -97,6 +97,9 @@ class ScreenSmsCode extends React.Component {
         this.next();
       }, 1000);
     }, (data) => {
+      if (data.error == 'no user') {
+        data.error = 'Неправильный код подтверждения, попробуйте ещё раз'
+      }
       this.context.store.dispatch({
         type: 'SCREEN_CHANGE',
         screen: 'Error',
