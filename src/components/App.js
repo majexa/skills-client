@@ -1,8 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Screens from './Screens';
-import Navigation from './Navigation';
-
+//import Navigation from './Navigation';
 import '../static/screens.css';
 import '../static/header.css';
 import config from '../config';
@@ -22,7 +21,7 @@ class App extends React.Component {
     // socket.on('connect', (() => {
     //   socket.emit('asd', { das: 123 });
     // }));
-    axios.get(config.serverUrl + '/api/v1/challenges').then((response) => {
+    axios.get(config.serverUrl + '/api/v1/chs').then((response) => {
       if (response.data.error) {
         this.context.store.dispatch({
           type: 'SCREEN_CHANGE',
@@ -30,43 +29,32 @@ class App extends React.Component {
           text: response.data.error
         });
       } else {
-        // ------------
         let data = {};
-        for (let i=0; i<response.data.body.length; i++) {
-          let v = response.data.body[i];
-          data[v.id] = v.data;
+        let v;
+        for (let i=0; i<response.data.length; i++) {
+          v = response.data[i];
+          data[v._id] = v;
         }
-        // ------------
         this.context.store.dispatch({
           type: 'SET_CHALLENGES',
-          items: response.data,
-          data: data
+          items: data
+        });
+        this.setState({
+          loaded: true
         });
       }
     }).catch((error) => {
       console.log(error);
     });
 
-    setTimeout(() => {
-      this.context.store.dispatch({
-        type: 'SET_TASKS',
-        tasks: {
-          5: {
-            text: 'asdasdqw dqwd qwd qw',
-            endingDate: 'February 10, 2017 00:00:00'
-          }
-        }
-      });
-      this.setState({
-        loaded: true
-      });
-    }, 1000);
     document.addEventListener('deviceready', () => {
       // this.context.store.dispatch({
       //   type: 'SCREEN_CHANGE',
       //   screen: 'Init'
       // });
     }, false);
+
+
     this.initSize();
 
     this.context.store.dispatch({

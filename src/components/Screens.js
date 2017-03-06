@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Navigation from './Navigation';
+//import Navigation from './Navigation';
 import ScreenInit from './ScreenInit';
 import ScreenError from './ScreenError';
 import ScreenTaskPhoto from './ScreenTaskPhoto';

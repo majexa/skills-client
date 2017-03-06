@@ -21,18 +21,19 @@ class ScreenInit extends React.Component {
     return (
       <div style={{width: this.props.size.width + 'px'}} className={'screen sInit'}>
         <div className="cont">
-          <p>Оперативная<br />помощь бизнесу</p>
-          <button onClick={this.onClick.bind(this)}>Сделать снимок</button>
+          <h1>Skills</h1>
+          <p>Прокачай себя сам</p>
+          <button onClick={this.onClick.bind(this)}>Начни прямо сейчас!</button>
         </div>
       </div>
     );
   }
 
   onClick() {
-      this.context.store.dispatch({
-          type: 'SCREEN_CHANGE',
-          screen: 'TaskPhoto'
-      });
+    this.context.store.dispatch({
+      type: 'SCREEN_CHANGE',
+      screen: 'Login'
+    });
   }
 
 }

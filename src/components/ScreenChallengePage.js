@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import '../static/challengePage.css';
 
 class ScreenChallengePage extends React.Component {
 
@@ -11,24 +12,43 @@ class ScreenChallengePage extends React.Component {
   }
 
   componentWillMount() {
+    if (!this.props.challenge.items[this.props.navigation.id]) {
+      this.context.store.dispatch({
+        type: 'SCREEN_CHANGE',
+        screen: 'ChallengeList'
+      });
+    }
     this.setState({
-      data: this.props.challenge.data[this.props.navigation.id]
+      challenge: this.props.challenge.items[this.props.navigation.id]
     });
   }
 
   render() {
-    console.log(this.state);
-    let startDescription = null;
-    if (this.state.data.periodType === 'default') {
+    let startDescription = null, start = null;
+    if (1 || this.state.challenge.periodType === 'default') {
       startDescription = <p><small>Вы можете начать в любое время, но закончить сможете не позже 23:59</small></p>
     }
+    if (this.props.auth.profile) {
+      start = <button>Начать</button>
+    } else {
+      start = '<p>Не хватает прав. Вероятно вы не авторизованеы</p>'
+    }
     return (
-      <div style={{width: this.props.size.width + 'px'}} className={'screen sInit'}>
+      <div style={{width: this.props.size.width + 'px'}} className={'screen sChallengePage'}>
         <div className="cont">
-          <h2>{this.state.data.title}</h2>
-          <p>{this.state.data.shortDesc}</p>
+          <h2>{this.state.challenge.title}</h2>
+          <p>{this.state.challenge.shortDesc}</p>
           {startDescription}
-          <button>Начать</button>
+          <div>
+          Задания:&nbsp;&nbsp;
+          {this.state.challenge.tasks.map(function(task, i) {
+            return (
+              <div className="task" key={i} title={task.description}></div>
+            );
+          })}
+          </div>
+          <hr/>
+          {start}
         </div>
       </div>
     );

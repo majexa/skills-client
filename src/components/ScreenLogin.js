@@ -37,10 +37,10 @@ class ScreenLogin extends React.Component {
         <div className="cont">
           <p className="phoneField">
             <span className="phonePlus">+</span><input name="phone" type="tel" placeholder="телефон"
-                   value={this.props.phone.phone}
-                   onChange={this.handleChange.bind(this)}
-                   onKeyUp={this.handleChange.bind(this)}
-            />
+                                                       value={this.props.phone.phone}
+                                                       onChange={this.handleChange.bind(this)}
+                                                       onKeyUp={this.handleChange.bind(this)}
+          />
           </p>
           {(this.validate() ?
               <button
@@ -59,18 +59,17 @@ class ScreenLogin extends React.Component {
     );
   }
 
-  next(event) {
-    event.preventDefault();
+  next() {
+    //this.sendSms();
     this.context.store.dispatch({
       type: 'SCREEN_CHANGE',
       screen: 'SmsCode'
     });
   }
 
-  login(event) {
-    event.preventDefault();
-    axios.get(config.serverUrl + '/api/v1/login?phone=' +
-      this.state.phone + '&code=' + this.state.code
+  sendSms() {
+    axios.get(config.serverUrl + '/api/v1/sendCode?phone=' +
+      this.props.phone.phone
     ).then((response) => {
       console.log(response.data);
     }).catch((error) => {

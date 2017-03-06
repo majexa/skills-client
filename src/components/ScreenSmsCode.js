@@ -7,16 +7,11 @@ class ScreenSmsCode extends React.Component {
 
   constructor(props) {
     super(props);
+    this.loginTimeoutId = 0;
+    this.nextScreenTimeoutId = 0;
     this.state = {
       code: '' //54289
     };
-  }
-
-  handleChange(event) {
-    this.setState({code: event.target.value});
-    if (this.validate()) {
-      this.login();
-    }
   }
 
   validate() {
@@ -39,7 +34,7 @@ class ScreenSmsCode extends React.Component {
           </p>
           {(this.validate() ?
               <button
-                onClick={this.login.bind(this)}>
+                onClick={this.next.bind(this)}>
                 Войти
               </button>
               : <button
@@ -66,36 +61,58 @@ class ScreenSmsCode extends React.Component {
     });
   }
 
-  next(data) {
+  next() {
+    if (this.nextScreenTimeoutId) {
+      clearTimeout(this.nextScreenTimeoutId);
+    }
     this.context.store.dispatch({
       type: 'SCREEN_CHANGE',
       screen: 'ChallengeList'
     });
   }
 
+  handleChange(event) {
+    this.setState({code: event.target.value});
+    if (this.validate()) {
+      this.login();
+    }
+  }
+
   login() {
-    this._login(null, function () {
-      alert('FUCK');
+    if (this.loginTimeoutId) {
+      clearTimeout(this.loginTimeoutId);
+    }
+    this.loginTimeoutId = setTimeout(() => {
+      this._login();
+    }, 100);
+  }
+
+  _login() {
+    this.__login((data) => {
+      this.context.store.dispatch({
+        type: 'SET_AUTH',
+        profile: data
+      });
+      this.nextScreenTimeoutId = setTimeout(() => {
+        this.next();
+      }, 1000);
+    }, (data) => {
+      this.context.store.dispatch({
+        type: 'SCREEN_CHANGE',
+        screen: 'Error',
+        text: data.error
+      });
     });
   }
 
-  _login(onSuccess, onFails) {
-    console.log('try to login');
+  __login(onSuccess, onFails) {
     axios.get(config.serverUrl + '/api/v1/login?phone=' +
       this.props.phone.phone + '&code=' + this.state.code
     ).then((response) => {
       if (response.data.error) {
-        this.context.store.dispatch({
-          type: 'SCREEN_CHANGE',
-          screen: 'Error',
-          text: response.data.error
-        });
+        onFails(response.data);
       } else {
-        //onSuccess(response.data);
-        this.context.store.dispatch({
-          type: 'SCREEN_CHANGE',
-          screen: 'ChallengeList'
-        });
+        onSuccess(response.data);
       }
     }).catch((error) => {
       console.log(error);

@@ -15,7 +15,10 @@ class ScreenTaskPhoto extends React.Component {
   render() {
     let photo = <p>Фото появится здесь</p>;
     if (this.state.imageData) {
-      photo = <p className="preview"><img src={'data:image/jpeg;base64,' + this.state.imageData}/></p>;
+      photo = <p className="preview">
+        <img
+          src={'data:image/jpeg;base64,' + this.state.imageData}
+          alt="Предпросмотр"/></p>;
     }
     let buttons;
     if (this.state.imageData) {

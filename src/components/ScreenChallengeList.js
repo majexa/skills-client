@@ -9,10 +9,10 @@ class ScreenChallengeList extends React.Component {
       <div style={{width: this.props.size.width + 'px'}} className={'screen sInit'}>
         <div className="cont">
           <div className="challengeManager">
-            {this.props.challenge.items.body.map((item, i) => {
+            {Object.values(this.props.challenge.items).map((item, i) => {
               return (
-                <div className="item" key={i} onClick={this.itemClick.bind(this, item.id)}>
-                  {item.data.title}
+                <div className="item" key={i} onClick={this.itemClick.bind(this, item._id)}>
+                  {item.title}
                 </div>
               );
             })}
