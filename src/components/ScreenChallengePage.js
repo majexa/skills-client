@@ -31,7 +31,7 @@ class ScreenChallengePage extends React.Component {
     if (this.props.auth.profile) {
       start = <button>Начать</button>
     } else {
-      start = '<p>Не хватает прав. Вероятно вы не авторизованеы</p>'
+      start = <p>Не хватает прав. Вероятно вы не авторизованеы</p>
     }
     return (
       <div style={{width: this.props.size.width + 'px'}} className={'screen sChallengePage'}>

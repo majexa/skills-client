@@ -42,6 +42,15 @@ class App extends React.Component {
         this.setState({
           loaded: true
         });
+
+
+        setTimeout(() => {
+          this.context.store.dispatch({
+            type: 'SCREEN_CHANGE',
+            screen: 'ChallengePage',
+            id: '58b01682c2201244625efbf8'
+          });
+        }, 1000);
       }
     }).catch((error) => {
       console.log(error);
