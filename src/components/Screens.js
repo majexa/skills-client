@@ -70,13 +70,16 @@ class Screens extends React.Component {
       currentScreen = this.getScreenComponent(this.props.navigation.screen);
       leftScreen = <ScreenA content="dummy"/>;
     }
+
     return (
       <div
         style={{
+          height: (this.props.size.height) + 'px',
           width: this.props.size.width + 'px',
         }}
         className="wrapper">
         <div style={{
+          //height: (this.props.size.height) + 'px',
           width: (this.props.size.width * 3) + 'px',
           transform: 'translate3d(' + offset + 'px, 0, 0)'
         }} className={'screens' + movingClassName}>

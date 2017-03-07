@@ -9,7 +9,7 @@ height: 50px;
 vertical-align: middle;
 width: 100%;
 }
-.App {
+.wrapper {
+box-sizing: border-box;
 padding-top: 50px;
-width: 100%;
 }

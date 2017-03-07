@@ -105,6 +105,7 @@ class App extends React.Component {
     }
     return (
       <div className="App" style={{width: this.props.size.width}}>
+
         <div className="header">
           {
             this.props.navigation.prevScreen ?
@@ -114,6 +115,7 @@ class App extends React.Component {
           }
           App
         </div>
+
         <Screens/>
         {/*<Navigation/>*/}
       </div>
