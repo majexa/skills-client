@@ -17,12 +17,19 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    console.log('App:componentDidMount. waiting 2 sec');
+    setTimeout(this._componentDidMount.bind(this), 2000);
+  }
+  _componentDidMount() {
     // let socket = io.connect('http://majexa.ru:8052');
     // socket.on('connect', (() => {
     //   socket.emit('asd', { das: 123 });
     // }));
+    console.log('Start request: ' + config.serverUrl + '/api/v1/chs');
     axios.get(config.serverUrl + '/api/v1/chs').then((response) => {
       if (response.data.error) {
+        console.log('error');
+        console.log(response.data.error);
         this.context.store.dispatch({
           type: 'SCREEN_CHANGE',
           screen: 'Error',
@@ -39,6 +46,9 @@ class App extends React.Component {
           type: 'SET_CHALLENGES',
           items: data
         });
+
+        console.log('all ok. change state to loaded: true');
+
         this.setState({
           loaded: true
         });

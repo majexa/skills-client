@@ -5,11 +5,15 @@ import '../static/challengeManager.css';
 class ScreenChallengeList extends React.Component {
 
   render() {
+    var items = [];
+    for (var i in this.props.challenge.items) {
+      items.push(this.props.challenge.items[i])
+    }
     return (
       <div style={{width: this.props.size.width + 'px'}} className={'screen sInit'}>
         <div className="cont">
           <div className="challengeManager">
-            {Object.values(this.props.challenge.items).map((item, i) => {
+            {items.map((item, i) => {
               return (
                 <div className="item" key={i} onClick={this.itemClick.bind(this, item._id)}>
                   {item.title}

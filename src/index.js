@@ -30,12 +30,27 @@ store.dispatch({
 });
 
 function startApp() {
-  render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.getElementById('root')
-  );
+  if (window.cordova) {
+
+    console.log('Wait 2 sec');
+    setTimeout(function() {
+
+      console.log('Set orientation to portrait');
+      window.screen.orientation.lock('portrait');
+
+      render(
+        <Provider store={store}>
+          <App />
+        </Provider>,
+        document.getElementById('root')
+      );
+
+    }, 2000);
+
+
+  } else {
+    console.log('window.cordova does not exists');
+  }
 }
 
 if (window.cordova) {
