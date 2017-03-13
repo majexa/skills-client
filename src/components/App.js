@@ -17,8 +17,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('App:componentDidMount. waiting 2 sec');
-    setTimeout(this._componentDidMount.bind(this), 2000);
+    //console.log('App:componentDidMount. waiting 2 sec');
+    //setTimeout(this._componentDidMount.bind(this), 2000);
+    this._componentDidMount();
   }
   _componentDidMount() {
     // let socket = io.connect('http://majexa.ru:8052');
@@ -26,7 +27,13 @@ class App extends React.Component {
     //   socket.emit('asd', { das: 123 });
     // }));
     console.log('Start request: ' + config.serverUrl + '/api/v1/chs');
-    axios.get(config.serverUrl + '/api/v1/chs').then((response) => {
+    axios({
+      method: 'get',
+      url: config.serverUrl + '/api/v1/chs',
+      headers: {
+        'Authorization': 'Bearer ' + 123
+      }
+    }).then((response) => {
       if (response.data.error) {
         console.log('error');
         console.log(response.data.error);
@@ -46,13 +53,10 @@ class App extends React.Component {
           type: 'SET_CHALLENGES',
           items: data
         });
-
         console.log('all ok. change state to loaded: true');
-
         this.setState({
           loaded: true
         });
-
         // FOR DEBUG
         // setTimeout(() => {
         //   this.context.store.dispatch({

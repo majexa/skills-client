@@ -30,13 +30,13 @@ store.dispatch({
 });
 
 function startApp() {
-  if (window.cordova) {
-
-    console.log('Wait 2 sec');
-    setTimeout(function() {
-
-      console.log('Set orientation to portrait');
-      window.screen.orientation.lock('portrait');
+  // if (window.cordova) {
+  //
+  //   console.log('Wait 2 sec');
+  //   setTimeout(function() {
+  //
+  //     console.log('Set orientation to portrait');
+  //     window.screen.orientation.lock('portrait');
 
       render(
         <Provider store={store}>
@@ -45,12 +45,12 @@ function startApp() {
         document.getElementById('root')
       );
 
-    }, 2000);
-
-
-  } else {
-    console.log('window.cordova does not exists');
-  }
+  //   }, 2000);
+  //
+  //
+  // } else {
+  //   console.log('window.cordova does not exists');
+  // }
 }
 
 if (window.cordova) {
