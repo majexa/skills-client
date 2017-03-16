@@ -21,10 +21,11 @@ class App extends React.Component {
     //setTimeout(this._componentDidMount.bind(this), 2000);
     this._componentDidMount();
   }
+
   _componentDidMount() {
-        this.setState({
-          loaded: true
-        });
+    this.setState({
+      loaded: true
+    });
     // let socket = io.connect('http://majexa.ru:8052');
     // socket.on('connect', (() => {
     //   socket.emit('asd', { das: 123 });
@@ -71,20 +72,24 @@ class App extends React.Component {
     // }).catch((error) => {
     //   console.log(error);
     // });
-
     document.addEventListener('deviceready', () => {
+    }, false);
+    this.init();
+  }
+
+  init() {
+    this.initSize();
+    if (this.initAuth()) {
+      this.context.store.dispatch({
+        type: 'SCREEN_CHANGE',
+        screen: 'Profile'
+      });
+    } else {
       this.context.store.dispatch({
         type: 'SCREEN_CHANGE',
         screen: 'Init'
       });
-    }, false);
-    this.initSize();
-    this.initAuth();
-    this.context.store.dispatch({
-      type: 'WINDOW_SIZE_CHANGE',
-      width: window.innerWidth,
-      height: window.innerHeight
-    });
+    }
   }
 
   initSize() {
@@ -110,7 +115,9 @@ class App extends React.Component {
         type: 'SET_AUTH',
         profile: profile
       });
+      return true;
     }
+    return false;
   }
 
   back() {
