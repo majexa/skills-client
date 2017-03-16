@@ -10,7 +10,7 @@ class ScreenInit extends React.Component {
     let that = this;
     setTimeout(function () {
       that.setLoading(true)
-    }, 0);
+    }, 100);
   }
 
   setLoading() {

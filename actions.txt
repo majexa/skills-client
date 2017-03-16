@@ -1,0 +1,24 @@
+Login:
+=====================
+
+{
+  type: 'STORE_AUTH',
+  profile: {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIkX18iOnsic3RyaWN0TW9kZSI6dHJ1ZSwic2VsZWN0ZWQiOnt9LCJnZXR0ZXJzIjp7fSwid2FzUG9wdWxhdGVkIjpmYWxzZSwiYWN0aXZlUGF0aHMiOnsicGF0aHMiOnsiY29kZSI6ImluaXQiLCJwaG9uZSI6ImluaXQiLCJfX3YiOiJpbml0IiwiX2lkIjoiaW5pdCJ9LCJzdGF0ZXMiOnsiaWdub3JlIjp7fSwiZGVmYXVsdCI6e30sImluaXQiOnsiX192Ijp0cnVlLCJjb2RlIjp0cnVlLCJwaG9uZSI6dHJ1ZSwiX2lkIjp0cnVlfSwibW9kaWZ5Ijp7fSwicmVxdWlyZSI6e319LCJzdGF0ZU5hbWVzIjpbInJlcXVpcmUiLCJtb2RpZnkiLCJpbml0IiwiZGVmYXVsdCIsImlnbm9yZSJdfSwiZW1pdHRlciI6eyJkb21haW4iOm51bGwsIl9ldmVudHMiOnt9LCJfZXZlbnRzQ291bnQiOjAsIl9tYXhMaXN0ZW5lcnMiOjB9fSwiaXNOZXciOmZhbHNlLCJfZG9jIjp7Il9fdiI6MCwiY29kZSI6IjMzMzE3IiwicGhvbmUiOiI3OTIwMjU2MDc3NiIsIl9pZCI6IjU4Y2E5MWI0MzAwNDE3NWI0NWRmNDhiMCJ9LCJpYXQiOjE0ODk2NzE5MzAsImV4cCI6MTQ5MDI3NjczMH0.9MZGTi2NNzj0wnlsdt8mNk4FqZ9v1TY5V4nPRjO-3NU",
+    "expiresIn": "2017-03-23T13:45:30.480Z",
+    "__v": 0,
+    "code": "33317",
+    "phone": "79202560776",
+    "_id": "58ca91b43004175b45df48b0"
+  }
+}
+
+
+
+Logout:
+{
+  type: 'LOGOUT'
+}
+
+
+

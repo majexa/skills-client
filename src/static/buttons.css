@@ -24,17 +24,3 @@
 .screens button:disabled {
     background: #ccc;
 }
-.header button.back {
-    background: none;
-    position: absolute;
-    left: 0;
-    box-sizing: border-box;
-    border: 0;
-    height: 100%;
-    padding: 0 20px 8px 20px;
-    color: #fff;
-    border-right: 1px solid rgba(255, 255, 255, 0.31);
-}
-.header button.back:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-}

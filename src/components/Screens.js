@@ -10,6 +10,7 @@ import ScreenSmsCode from './ScreenSmsCode';
 import ScreenChallengeList from './ScreenChallengeList';
 import ScreenChallengePage from './ScreenChallengePage';
 import ScreenA from './ScreenA';
+import ScreenProfile from './ScreenProfile';
 
 class Screens extends React.Component {
 
@@ -41,6 +42,8 @@ class Screens extends React.Component {
         return <ScreenChallengePage/>;
       case 'Task':
         return <ScreenTask/>;
+      case 'Profile':
+        return <ScreenProfile/>;
       default:
         throw new Error('ScreenComponent for "' + name + '" is not defined');
     }

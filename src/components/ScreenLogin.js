@@ -6,7 +6,7 @@ import config from '../config';
 class ScreenLogin extends React.Component {
 
   handleChange(event) {
-    //event.stopPropagation();
+    // event.stopPropagation();
     this.context.store.dispatch({
       type: 'PHONE_CHANGE',
       phone: event.target.value
@@ -25,11 +25,12 @@ class ScreenLogin extends React.Component {
       <div style={{width: this.props.size.width + 'px'}} className={'screen sInit'}>
         <div className="cont">
           <p className="phoneField">
-            <span className="phonePlus">+</span><input name="phone" type="tel" placeholder="телефон"
-                                                       value={this.props.phone.phone}
-                                                       onChange={this.handleChange.bind(this)}
-                                                       onKeyUp={this.handleChange.bind(this)}
-          />
+            <span className="phonePlus">+</span>
+            <input name="phone" type="tel" placeholder="телефон"
+                   value={this.props.phone.phone}
+                   onChange={this.handleChange.bind(this)}
+                   onKeyUp={this.handleChange.bind(this)}
+            />
           </p>
           {(this.validate() ?
               <button
@@ -42,7 +43,6 @@ class ScreenLogin extends React.Component {
                 Далее >
               </button>
           )}
-
         </div>
       </div>
     );
