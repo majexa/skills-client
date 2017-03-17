@@ -5,7 +5,7 @@ const dummy = (state = {}, action) => {
   switch (action.type) {
     case 'SCREEN_INIT':
       return {
-        screen: 'Init',
+        screen: 'Login',
         nextScreen: false,
         startChange: false
       };
@@ -27,11 +27,18 @@ const dummy = (state = {}, action) => {
       return Object.assign({}, state, data);
     case 'SCREEN_RESET':
       console.log('SCREEN_RESET to ' + state.nextScreen);
+      let screen;
       if (!state.nextScreen) {
-        throw new Error('You need to define nextScreen propert wile resetting screen');
+        if (!action.screen) {
+          throw new Error('You need to define nextScreen property while resetting screen. Or add "screen" property');
+        } else {
+          screen = action.screen;
+        }
+      } else {
+        screen = state.nextScreen;
       }
       return Object.assign({}, state, {
-        screen: state.nextScreen,
+        screen: screen,
         nextScreen: false,
         startChange: false
       });

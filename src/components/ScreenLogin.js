@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as axios from 'axios';
 import config from '../config';
+import Request from '../utils/Request';
 
 class ScreenLogin extends React.Component {
 
@@ -13,6 +14,10 @@ class ScreenLogin extends React.Component {
     });
   }
 
+  componentDidMount() {
+    new Request(this.context.store).get(config.serverUrl);
+  }
+
   validate() {
     if (this.props.phone.phone && this.props.phone.phone.match(/^[1-9]{1}[0-9]{10}$/)) {
       return true;
@@ -21,6 +26,7 @@ class ScreenLogin extends React.Component {
   }
 
   render() {
+
     return (
       <div style={{width: this.props.size.width + 'px'}} className={'screen sInit'}>
         <div className="cont">
